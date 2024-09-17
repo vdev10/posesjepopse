@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Poses tzai popse?</title>
+<style>
+    /* Basic Reset */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    /* Body Styling */
+    body {
+        font-family: 'Helvetica Neue', Arial, sans-serif;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: #fff;
+        overflow: hidden;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    /* Header Styling */
+    h1 {
+        font-size: 48px;
+        margin-bottom: 50px;
+        animation: fadeInDown 1s ease;
+    }
+    /* Container Styling */
+    .container {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 40px;
+        border-radius: 10px;
+        text-align: center;
+        animation: fadeInUp 1s ease;
+    }
+    /* Input Styling */
+    input[type="date"] {
+        padding: 15px;
+        margin: 10px 0;
+        font-size: 18px;
+        border: none;
+        border-radius: 5px;
+        width: 220px;
+    }
+    /* Button Styling */
+    button {
+        padding: 15px 30px;
+        font-size: 18px;
+        margin-top: 20px;
+        border: none;
+        border-radius: 5px;
+        background-color: #fff;
+        color: #764ba2;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.3s;
+    }
+    button:hover {
+        background-color: #f1f1f1;
+        transform: translateY(-5px);
+    }
+    /* Result Styling */
+    .result {
+        margin-top: 30px;
+        font-size: 36px;
+        animation: zoomIn 1s ease;
+    }
+    /* Animations */
+    @keyframes fadeInDown {
+        from { opacity: 0; transform: translateY(-50px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(50px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes zoomIn {
+        from { opacity: 0; transform: scale(0.8); }
+        to { opacity: 1; transform: scale(1); }
+    }
+    /* Responsive Design */
+    @media (max-width: 600px) {
+        h1 {
+            font-size: 36px;
+        }
+        .container {
+            padding: 20px;
+        }
+        input[type="date"] {
+            width: 100%;
+        }
+    }
+</style>
+</head>
+<body>
+
+<h1>Poses tzai popse?</h1>
+<div class="container">
+    <input type="date" id="dateTo" onchange="calculateDays();"><br>
+    <button onclick="calculateDays()">Pe mou na doume</button>
+    <div class="result" id="result"></div>
+</div>
+
+<script>
+    document.getElementById('dateTo').setAttribute('min', new Date().toISOString().split('T')[0]);
+
+    function calculateDays() {
+        var dateFrom = new Date();
+        var dateToInput = document.getElementById('dateTo').value;
+
+        if(!dateToInput) {
+            document.getElementById('result').innerHTML = "E thkialekse mera gamo ton kapile sou";
+            return;
+        }
+
+        var dateTo = new Date(dateToInput);
+
+        // Reset time components for accurate calculation
+        dateFrom.setHours(0, 0, 0, 0);
+        dateTo.setHours(0, 0, 0, 0);
+
+        var timeDiff = dateTo.getTime() - dateFrom.getTime();
+        var daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+        if(daysDiff < 0) {
+            document.getElementById('result').innerHTML = "Eperasen";
+        } else if(daysDiff === 0) {
+            document.getElementById('result').innerHTML = "SIMERAAA!!";
+        } else {
+            document.getElementById('result').innerHTML = daysDiff + " tziai popse.";
+        }
+    }
+</script>
+
+</body>
+</html>
