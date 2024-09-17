@@ -108,31 +108,34 @@
     document.getElementById('dateTo').setAttribute('min', new Date().toISOString().split('T')[0]);
 
     function calculateDays() {
-        var dateFrom = new Date();
-        var dateToInput = document.getElementById('dateTo').value;
-
-        if(!dateToInput) {
-            document.getElementById('result').innerHTML = "E thkialekse mera gamo ton kapile sou";
-            return;
-        }
-
-        var dateTo = new Date(dateToInput);
-
-        // Reset time components for accurate calculation
-        dateFrom.setHours(0, 0, 0, 0);
-        dateTo.setHours(0, 0, 0, 0);
-
-        var timeDiff = dateTo.getTime() - dateFrom.getTime();
-        var daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
-
-        if(daysDiff < 0) {
-            document.getElementById('result').innerHTML = "Eperasen";
-        } else if(daysDiff === 0) {
-            document.getElementById('result').innerHTML = "SIMERAAA!!";
-        } else {
-            document.getElementById('result').innerHTML = daysDiff + " tziai popse.";
-        }
+    // Get today's date without time (set time to midnight)
+    var dateFrom = new Date();
+    dateFrom.setHours(0, 0, 0, 0);
+    
+    // Get the user-selected "date to"
+    var dateToInput = document.getElementById('dateTo').value;
+    
+    if (!dateToInput) {
+        alert('Please select a date.');
+        return;
     }
+    
+    var dateTo = new Date(dateToInput);
+    dateTo.setHours(0, 0, 0, 0);  // Set time to midnight for the target date
+    
+    // Calculate difference in milliseconds and convert to days
+    var timeDiff = dateTo - dateFrom;
+    var daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));  // Convert ms to days
+    
+    // Display result
+    if (daysDiff < 0) {
+        document.getElementById('result').innerHTML = "Eperasen";
+    } else if (daysDiff === 0) {
+        document.getElementById('result').innerHTML = "SIMERAAA!!";
+    } else {
+        document.getElementById('result').innerHTML = daysDiff + " tziai popse.";
+    }
+}
 </script>
 
 </body>
