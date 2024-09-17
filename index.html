@@ -121,10 +121,7 @@
     }
     
 	// Check if the date is 12th December
-    if (dateTo.getMonth() === 04 && dateTo.getDate() === 24) {  // December is month 11 in JavaScript (0-based index)
-        document.getElementById('result').innerHTML = "FAOUSAAAAAAAA";
-        return;  // Exit the function here if it's December 12th
-    }
+  
 	
     var dateTo = new Date(dateToInput);
     dateTo.setHours(0, 0, 0, 0);  // Set time to midnight for the target date
