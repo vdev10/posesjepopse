@@ -130,9 +130,9 @@
     }
 	
 	// Check if the date is 12th December
-    if (dateTo.getMonth() === 3 && dateTo.getDate() === 24) {  // December is month 11 in JavaScript (0-based index)
-        //document.getElementById('result').innerHTML = "FAOUSAAAAAAAA";
-        //return;  // Exit the function here if it's December 12th
+    if (dateTo.getMonth() === 0 && dateTo.getDate() === 25) {  // December is month 11 in JavaScript (0-based index)
+        document.getElementById('result').innerHTML = "FAOUSAAAAAAAA";
+        return;  // Exit the function here if it's December 12th
     }
 	
     // Calculate difference in milliseconds and convert to days
