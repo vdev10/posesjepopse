@@ -105,7 +105,25 @@
 </div>
 
 <script>
+
+// Function to set a date in localStorage
+function setLocalStorage(key, value) {
+    localStorage.setItem(key, value);
+}
+
+// Function to get a date from localStorage
+function getLocalStorage(key) {
+    return localStorage.getItem(key);
+}
+
     document.getElementById('dateTo').setAttribute('min', new Date().toISOString().split('T')[0]);
+
+// Check if there's a saved date in localStorage and prefill the input if available
+var savedDate = getLocalStorage('posesjepopse_savedDate');
+if (savedDate) {
+    document.getElementById('dateTo').value = savedDate;
+    calculateDays();  // Auto calculate if there's a previously saved date
+}
 
     function calculateDays() {
     // Get today's date without time (set time to midnight)
@@ -134,6 +152,9 @@
         //document.getElementById('result').innerHTML = "FAOUSAAAAAAAA";
         //return;  // Exit the function here if it's December 12th
     }
+	
+	// Save the selected date to localStorage
+    setLocalStorage('posesjepopse_savedDate', dateToInput);
 	
     // Calculate difference in milliseconds and convert to days
     var timeDiff = dateTo - dateFrom;
